@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>GreenVendor</title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <script defer src="index.js" type="module"></script>
+    <script src="web-component.js" type="module"></script>
+  </head>
+  <body>
+    <header class="header-wrapper">
+      <h1 class="shop-name">GreenVendor</h1>
+      <button class="shopping-cart">
+        <i class="pot-icon">
+          <img src="assets/empty-plant-pot.png" alt="" class="pot" />
+        </i>
+        <span class="cart-name">Your Pot</span>
+        <span class="amount-badge">x</span>
+      </button>
+    </header>
+    <nav>
+      <ul class="main-navigation">
+        <li><a href="#decorative">decorative</a></li>
+        <li><a href="#fruit">fruit</a></li>
+        <li><a href="#vegetable">vegetable</a></li>
+      </ul>
+    </nav>
+    <main>
+      <ul class="menu" id="menu"> 
+      </ul>
+    </main>
+    <footer id="footer">
+      rights and staff<word-count id="wc">1</word-count>
+    </footer>
+  </body>
+</html>
