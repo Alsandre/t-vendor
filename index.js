@@ -33,7 +33,8 @@ const request = async () => {
       element.productName,
       element.review,
       element.id,
-      element.imageUrl
+      element.imageUrl,
+      element.price
     );
 
     //    productCard.setAttribute('product-name', element.productName);
@@ -44,3 +45,6 @@ const request = async () => {
 };
 
 request();
+
+let addBtn = document.querySelector('.add-icon');
+console.log(addBtn)

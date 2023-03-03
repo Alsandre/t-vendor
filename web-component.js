@@ -2,17 +2,18 @@ export class ProductCard extends HTMLElement {
   static get observedAttributes () {
     return ['product-name', 'image-url', 'description']
   }
-  constructor(title, description, id, imageUrl) {
+  constructor(title, description, id, imageUrl, price) {
     super();
     this.title = title;
     this.description = description;
     this.imageUrl = imageUrl;
     this.id = id;
+    this.price = price;
 
-    const shadow = this.attachShadow({ mode: "open" });
+    this.shadow = this.attachShadow({ mode: "open" });
 
-    const containerTag = document.createElement("div");
-    containerTag.setAttribute("class", "card-container");
+    this.containerTag = document.createElement("div");
+    this.containerTag.setAttribute("class", "card-container");
 
     const nameTag = document.createElement("h2");
     nameTag.setAttribute("class", "name");
@@ -23,12 +24,21 @@ export class ProductCard extends HTMLElement {
 
     const imgTag = document.createElement("img");
     imgTag.setAttribute("src", this.imageUrl);
+    imgTag.setAttribute("alt", this.title);
     imgFrameTag.appendChild(imgTag);
 
     const descriptionTag = document.createElement("p");
     descriptionTag.textContent = this.description;
     descriptionTag.setAttribute("class", "description");
 
+    const priceBadge = document.createElement('span');
+    priceBadge.innerHTML = `<span class="price-badge"><span class="price-whole">${Math.floor(this.price)}</span><span class="price-change">${((this.price-Math.floor(this.price))*100).toFixed(0)}</span></span>`
+    // priceBadge.textContent = this.price;
+
+    const addToBasket = document.createElement('span');
+    addToBasket.setAttribute('class', 'add-icon');
+    addToBasket.setAttribute('id', `add_${this.id}`);
+    addToBasket.innerHTML = '<span class="plus-sign">+</span><br><span class="add-badge">ADD</span>';
 
 
     let style = document.createElement("style");
@@ -46,7 +56,6 @@ export class ProductCard extends HTMLElement {
             background-size: 100%;
             position: relative;
             padding-top: 30px;
-            overflow: hidden;
           }
 
           .name {
@@ -57,42 +66,108 @@ export class ProductCard extends HTMLElement {
             line-height: 20px;
             font-style: italic;
           }
+          .price-badge {
+            background-color: rgba(193, 202, 194, 0.6);
+            border-radius: 50%;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            right: -0.5em; 
+            transform: translate(50%); 
+            display: none;
+          }
+          .price-whole {
+            font-family: 'Lobster', cursive;
+            display: block;
+            width: 40px;
+            padding: 0.3rem 0 0 0;
+            font-weight: bold;
+            text-align: center;
+            background-color: rgba(255, 202, 92);
+            border-bottom: 1px solid #ccc;
+          }
+          .price-change {
+            font-family: 'Lobster', cursive;
+            display: block;
+            width: 40px;
+            padding: 0.1rem 0 0.3rem 0;
+            text-align: center;
+            font-style: italic;
+            font-size: 0.7em;
+            background-color: rgba(122, 175, 136, 1);
+          }
+          .add-icon {
+            background-color: rgba(193, 202, 194, 0.6);
+            padding: 0.1em;
+            border-bottom-left-radius: 10px;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            text-align: center;
+            color: #333;
+            position: absolute;
+            top: 50px;
+            right: -0.5em; 
+            transform: translate(50%); 
+            display: none;
+          }
+          .plus-sign {
+            // display: block;
+            font-family: courier;
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 15px;
+            padding: 0;
+            margin: 0;
+          }
+          .add-badge {
+            font-size: 14px;
+            line-height: 10px;
+            font-family: courier;
+            margin: 0;
+          }
+          
+          .add-icon:hover {
+            background-color: rgba(193, 202, 194, 1);
+            border: 1px solid rgba(255, 202, 92);
+          }
 
           .image-frame {
             width: 136px;
             height: 115px;
             margin: auto;
-            overflow: hidden;
-            box-shadow: inset 4px 4px 10px rgba(16, 64, 9, 1)
-
           }
           .image-frame img {
             width: 100%;
             height: 100%;
           }
           .description {
-            margin-top: 60px;
+            margin-top: 40px;
             text-align: center;
           }`;
 
-    containerTag.appendChild(nameTag);
-    containerTag.appendChild(imgFrameTag);
-    containerTag.appendChild(descriptionTag);
-    shadow.appendChild(style);
-    shadow.appendChild(containerTag);
+    this.containerTag.appendChild(nameTag);
+    this.containerTag.appendChild(imgFrameTag);
+    this.containerTag.appendChild(descriptionTag);
+    this.containerTag.appendChild(priceBadge);
+    this.containerTag.appendChild(addToBasket);
+    this.shadow.appendChild(style);
+    this.shadow.appendChild(this.containerTag);
 
-    containerTag.addEventListener('mouseover', (event) => {
+  }
+  connectedCallback() {
+    this.containerTag.addEventListener('mouseover', (event) => {
       event.stopImmediatePropagation();
       event.currentTarget.style.scale = '1.05';
-      event.currentTarget.style.height = 'auto';      
+      this.shadow.querySelector('.price-badge').style.display = 'block';
+      this.shadow.querySelector('.add-icon').style.display = 'block';
     });
-    containerTag.addEventListener('mouseleave', (event) => {
+    this.containerTag.addEventListener('mouseleave', (event) => {
       event.stopImmediatePropagation();
-      event.currentTarget.style.scale = '1'
-      event.currentTarget.style.height = '260px';
+      event.currentTarget.style.scale = '1';
+      this.shadow.querySelector('.price-badge').style.display = 'none';
+      this.shadow.querySelector('.add-icon').style.display = 'none';
     })
   }
-  get 
 }
 
 customElements.define("product-card", ProductCard);
