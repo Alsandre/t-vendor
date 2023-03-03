@@ -63,6 +63,7 @@ h2 {
     right: 50%;
     transform: translateX(50%);
     z-index: 5;
+    display: none;
 }
 .basket-list {
     list-style: none;
