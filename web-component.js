@@ -1,3 +1,5 @@
+import { addToBasketHandler, localStorageUpdateHandler } from "./utility.js";
+
 export class ProductCard extends HTMLElement {
   static get observedAttributes () {
     return ['product-name', 'image-url', 'description']
@@ -35,10 +37,10 @@ export class ProductCard extends HTMLElement {
     priceBadge.innerHTML = `<span class="price-badge"><span class="price-whole">${Math.floor(this.price)}</span><span class="price-change">${((this.price-Math.floor(this.price))*100).toFixed(0)}</span></span>`
     // priceBadge.textContent = this.price;
 
-    const addToBasket = document.createElement('span');
-    addToBasket.setAttribute('class', 'add-icon');
-    addToBasket.setAttribute('id', `add_${this.id}`);
-    addToBasket.innerHTML = '<span class="plus-sign">+</span><br><span class="add-badge">ADD</span>';
+    this.addToBasket = document.createElement('span');
+    this.addToBasket.setAttribute('class', 'add-icon');
+    this.addToBasket.setAttribute('id', `add_${this.id}`);
+    this.addToBasket.innerHTML = '<span class="plus-sign">+</span><br><span class="add-badge">ADD</span>';
 
 
     let style = document.createElement("style");
@@ -108,6 +110,7 @@ export class ProductCard extends HTMLElement {
             top: 50px;
             right: -0.5em; 
             transform: translate(50%); 
+            transition: all 0.2s;
             display: none;
           }
           .plus-sign {
@@ -129,6 +132,7 @@ export class ProductCard extends HTMLElement {
           .add-icon:hover {
             background-color: rgba(193, 202, 194, 1);
             border: 1px solid rgba(255, 202, 92);
+            cursor: pointer;
           }
 
           .image-frame {
@@ -149,7 +153,7 @@ export class ProductCard extends HTMLElement {
     this.containerTag.appendChild(imgFrameTag);
     this.containerTag.appendChild(descriptionTag);
     this.containerTag.appendChild(priceBadge);
-    this.containerTag.appendChild(addToBasket);
+    this.containerTag.appendChild(this.addToBasket);
     this.shadow.appendChild(style);
     this.shadow.appendChild(this.containerTag);
 
@@ -166,6 +170,16 @@ export class ProductCard extends HTMLElement {
       event.currentTarget.style.scale = '1';
       this.shadow.querySelector('.price-badge').style.display = 'none';
       this.shadow.querySelector('.add-icon').style.display = 'none';
+    })
+    this.addToBasket.addEventListener('click', (event) => {
+      event.currentTarget.style.scale = '0.9';
+      console.log(event.currentTarget)
+      setTimeout(() => {
+        this.shadow.querySelector('.add-icon').style.scale = '1';
+      }, 100);
+      addToBasketHandler();
+      localStorageUpdateHandler(event.currentTarget.id)
+
     })
   }
 }

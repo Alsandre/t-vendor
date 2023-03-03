@@ -1,26 +1,9 @@
 import { ProductCard } from "./web-component.js";
+import { basketClickHandler } from "./utility.js";
 
-// let product1 = {
-//     id: '',
-//     description: '',
-//     title: '',
-//     price: '',
-//     tag: []
-// };
+const basketBtn = document.querySelector('.shopping-basket');
 
-// class Product {
-//     constructor(id, description, title, price){
-//         this.id = id;
-//         this.description = description;
-//         this.title = title;
-//         this.name = name;
-//         this.price = price;
-//         this.tag = tag;
-//     }
-//     clickHandler
-// }
-
-// Create a class for the element
+basketBtn.onclick = basketClickHandler;
 
 const request = async () => {
   const res = await fetch(
@@ -36,15 +19,15 @@ const request = async () => {
       element.imageUrl,
       element.price
     );
-
     //    productCard.setAttribute('product-name', element.productName);
     //    productCard.setAttribute('image-url', element.imageUrl);
     //    productCard.setAttribute('description', element.review);
     listContainer.appendChild(productCard);
   });
+  console.dir(data[Object.keys(data)[0]])
+  localStorage.setItem('fresh-menu', JSON.stringify(data[Object.keys(data)[0]]))
 };
 
 request();
 
 let addBtn = document.querySelector('.add-icon');
-console.log(addBtn)

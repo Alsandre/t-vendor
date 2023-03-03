@@ -15,17 +15,33 @@
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
     <script defer src="index.js" type="module"></script>
     <script src="web-component.js" type="module"></script>
+    <script src="utility.js" type="module"></script>
   </head>
   <body>
     <header class="header-wrapper">
       <h1 class="shop-name">GreenVendor</h1>
-      <button class="shopping-cart">
-        <i class="pot-icon">
-          <img src="assets/empty-plant-pot.png" alt="" class="pot" />
-        </i>
+      <button class="shopping-basket">
+        <span class="pot-total">
+          <i class="pot-icon">
+            <img src="assets/empty-plant-pot.png" alt="" class="pot" />
+          </i>
+          <span class="amount-badge">x</span>
+          <span id="amount-field" style="width: 20px; display: inline-block;"></span>
+        </span>
         <span class="cart-name">Your Pot</span>
-        <span class="amount-badge">x</span>
       </button>
+      <div class="basket">
+        <ul class="basket-list">
+          <li>
+            <span class="basket-product-name">Monstera</span>
+            <span class="basket-product-price">price</span>
+            <span>x</span>
+            <span class="basket-product-amount">quantity</span>
+            <span class="basket-product-sum">sum</span>
+          </li>
+        </ul>
+        <span class="basket-total"></span>
+      </div>
     </header>
     <nav>
       <ul class="main-navigation">
