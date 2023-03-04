@@ -19,7 +19,7 @@ export function localStorageUpdateHandler (id) {
         if(isPlantInCurrentBasket){
             newBasket =  currentBasket.map(el => {
                 if(`add_${el.id}` === id){
-                    return {...el, amount: el.amount++}
+                    return {...el, amount: el.amount+1}
                 }else return el;
             })
         }else{
@@ -29,15 +29,9 @@ export function localStorageUpdateHandler (id) {
         newBasket = [{...currentPlant, amount: 1}]
     }
     localStorage.setItem('order-amount', JSON.stringify(newBasket))
-    console.log(currentPlant, 'plant');
-    console.log(currentBasket, 'basket');
-    console.log(id, 'id');
-    console.log(localStorage)
+    console.log(JSON.parse(localStorage.getItem('order-amount')))
 };
 
 export function basketClickHandler () {
-    toggleDisplay('.basket')
+        toggleDisplay('.basket')
 }
-// localStorage.clear();
-console.dir(localStorage)
-// localStorageUpdateHandler()

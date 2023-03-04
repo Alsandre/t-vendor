@@ -16,6 +16,13 @@ h2 {
     background-color: rgba(255, 202, 92);
 }
 
+/* Navigation */
+.main-navigation {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+}
+
 /* cart */
 .shopping-basket {
     background-color: transparent;

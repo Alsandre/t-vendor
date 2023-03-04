@@ -173,11 +173,11 @@ export class ProductCard extends HTMLElement {
     })
     this.addToBasket.addEventListener('click', (event) => {
       event.currentTarget.style.scale = '0.9';
-      console.log(event.currentTarget)
       setTimeout(() => {
         this.shadow.querySelector('.add-icon').style.scale = '1';
       }, 100);
       addToBasketHandler();
+      console.log(event.currentTarget.id)
       localStorageUpdateHandler(event.currentTarget.id)
 
     })
