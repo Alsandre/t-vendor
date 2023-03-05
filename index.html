@@ -18,43 +18,75 @@
     <script src="utility.js" type="module"></script>
   </head>
   <body>
+    <div class="backdrop" id="backdrop"></div>
+    <div class="background-image"></div>
+
     <header class="header-wrapper">
       <h1 class="shop-name">GreenVendor</h1>
-      <button class="shopping-basket">
+
+      <nav class="main-navigation">
+        <ul class="navigation-list">
+          <li>Home</li>
+          <li>Menu</li>
+          <li>About</li>
+          <li>Contact</li>
+        </ul>
+      </nav>
+
+      <button class="basket-button">
         <span class="pot-total">
           <i class="pot-icon">
             <img src="assets/empty-plant-pot.png" alt="" class="pot" />
           </i>
           <span class="amount-badge">x</span>
-          <span id="amount-field" style="width: 20px; display: inline-block;"></span>
+          <span
+            id="amount-field"
+            style="width: 20px; display: inline-block"
+          ></span>
         </span>
-        <span class="cart-name">Your Pot</span>
+        <span class="cart-name">Your Basket</span>
       </button>
-      <div class="basket">
+
+      <div class="basket" id="basket">
         <ul class="basket-list">
-          <li>
-            <span class="basket-product-name">Monstera</span>
-            <span class="basket-product-price">price</span>
+          <li class="basket-item">
+            <span class="border basket-product-name">Name</span>
+            <span class="border basket-product-price">Price</span>
             <span>x</span>
-            <span class="basket-product-amount">quantity</span>
-            <span class="basket-product-sum">sum</span>
+            <span class="border basket-product-amount">Amount</span>
+            <span>=</span>
+            <span class="border basket-product-sum">Sum</span>
+            <span class="remove-button-space"></span>
           </li>
         </ul>
-        <span class="basket-total"></span>
+        <div class="basket-total">
+          <span>total:</span><span id="basket-total"></span>
+        </div>
+        <div class="basket-actions">
+          <button id="close-basket">close basket</button>
+          <button id="place-order">place order</button>
+        </div>
       </div>
+
     </header>
-    <nav>
-      <ul class="main-navigation">
-        <li><a href="#decorative">decorative</a></li>
-        <li><a href="#fruit">fruit</a></li>
-        <li><a href="#vegetable">vegetable</a></li>
-      </ul>
-    </nav>
+
     <main>
-      <ul class="menu" id="menu"></ul>
+      <!-- <green-basket></green-basket> -->
+      <aside>
+        <div class="search-field">
+          <label for="search-bar">Search by tag</label>
+          <input type="text" name="search-bar" id="search-bar" class="search-bar" />
+        </div>
+
+        <ul class="selection-menu">
+          <li>decorative</li>
+          <li>fruit</li>
+          <li>vegetable</li>
+        </ul>
+      </aside>
+      <ul class="main-content" id="menu"></ul>
     </main>
-    <footer id="footer">
-      rights and staff<word-count id="wc">1</word-count>
-    </footer>
+
+    <footer id="footer">rights and staff</footer>
   </body>
 </html>

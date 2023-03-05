@@ -1,7 +1,14 @@
 import { ProductCard } from "./web-component.js";
-import { basketClickHandler } from "./utility.js";
+import { $, toggleDisplay } from "./utility.js";
+import { basketClickHandler } from "./event-handlers.js";
 
-const basketBtn = document.querySelector('.shopping-basket');
+const basketBtn = $('.basket-button');
+const backdrop = $('#backdrop');
+
+backdrop.addEventListener('click', () => {
+  toggleDisplay('#basket');
+  toggleDisplay('#backdrop')
+})
 
 basketBtn.onclick = basketClickHandler;
 
@@ -12,7 +19,7 @@ const request = async () => {
   const data = await res.json();
   let senquota = [];
   data[Object.keys(data)[0]].forEach((element) => {
-    let listContainer = document.querySelector("#menu");
+    let listContainer = $("#menu");
     let productCard = new ProductCard(
       element.productName,
       element.review,
@@ -35,5 +42,5 @@ const request = async () => {
 
 request();
 
-let addBtn = document.querySelector('.add-icon');
+let addBtn = $('.add-icon');
 

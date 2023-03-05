@@ -12,25 +12,33 @@ h2 {
 .header-wrapper {
     display: flex;
     justify-content: space-between;
-    padding: 2rem;
+    padding: 1rem;
     background-color: rgba(255, 202, 92);
+}
+.shop-name {
+    justify-self: flex-start;
 }
 
 /* Navigation */
 .main-navigation {
+    align-self: flex-end;
+}
+.navigation-list {
     display: flex;
-    flex-direction: column;
-    position: sticky;
+    gap: 20px;
+    list-style: none;
+    display: flex;
 }
 
+
 /* cart */
-.shopping-basket {
+.basket-button {
     background-color: transparent;
     padding: 0.5rem;
     border: none;
 }
-.shopping-basket:hover,
-.shopping-basket:active {
+.basket-button:hover,
+.basket-button:active {
     outline: none;
     border: none;
     scale: 1.02;
@@ -59,9 +67,11 @@ h2 {
 
 /* Basket */
 .basket {
-    width: 25%;
+    position: relative;
+    width: 40%;
+    min-width: 400px;
     height: auto;
-    padding: 1rem;
+    padding: 2rem;
     position: fixed;
     background-color: #e7ebe3;
     border-radius: 20px;
@@ -69,35 +79,150 @@ h2 {
     top: 6rem;
     right: 50%;
     transform: translateX(50%);
-    z-index: 5;
+    z-index: 100;
     display: none;
 }
 .basket-list {
     list-style: none;
 }
-.basket-total {
-    display: block;
-    width: 40px;
-    height: 20px;
-    background: green;
-    float: right;
-}
-
-/* Navigation */
-.main-navigation {
-    list-style: none;
-    width: 100%;
+.basket-item {
+    background-color: #ccc;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    text-align: center;
+}
+.remove-button-space {
+    width: 50px;
+    
+}
+.basket-product-name{
+    flex: 1 0 100px;
+    border-right: 1px solid #333;
+}
+.basket-product-price {
+    flex-basis: 60px;
+}
+.basket-product-amount {
+    flex-basis: 80px;
+}
+.basket-product-sum {
+    flex-basis: 60px;
+}
+.basket-total {
+    margin: 0.3rem 0;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+#basket-total {
+    width: 90px;
+    text-align: left;
+    padding-left: 0.3em;
+}
+.basket-actions {
+    margin-top: 0.3rem;
+    display: flex;
+    justify-content: space-around;
+}
+.basket-actions button {
+    background-color: rgba(255, 202, 92);
+    padding: 0.5em;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.basket-actions button:hover,
+.basket-actions button:active {
+    scale: 1.03;
+    border: 1px solid #333;
+}
+.backdrop {
+    width: 100%;
+    height: 110vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #1f864dbb;
+    z-index: 50;
+    display: none;
 }
 
 /* Main */
-.menu {
+.background-image {
+    position: fixed;
+    width: 110%;
+    height: 110vh;
+    background: url(./assets/background.png);
+    background-size: 100%;
+    z-index: -50;
+    top: 0;
+}
+main {
+    display: flex;
+}
+aside {
+    background-color: #69a153d7;
+    padding: 0.5rem;
+    padding-left: 1rem;
+}
+.search-field {
+    width: 100%;
+}
+.search-field label {
+    display: inline-block;
+    width: 100%;
+    font-style: italic;
+    color: #333;
+    text-align: center;
+}
+.search-bar {
+    width: 100%;
+    line-height: 1.3rem;
+    letter-spacing: 1.5px;
+    text-transform: capitalize;
+    padding: 0.2rem;
+    border-radius: 9px;
+    border:  1px solid transparent;
+}
+.search-bar:active,
+.search-bar:focus {
+    outline: none;
+    border:  1px solid rgba(255, 202, 92);
+}
+.selection-menu {
+    list-style: none;
+}
+.selection-menu li {
+    line-height: 1.5em;
+    text-decoration: underline;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 0.2rem;
+}
+.selection-menu li:hover,
+.selection-menu li:active {
+    text-decoration: none;
+    font-style: italic;
+    background-color: rgba(255, 202, 92);
+    box-shadow: -10px 0 5px rgba(255, 202, 92);
+    border-radius: 10px;
+}
+.main-content {
     list-style: none;
     width: fit-content;
     margin: auto;
-    margin-top: 1rem;
+    padding-left: 4rem;
+    padding-right: 6rem;
+    /* width: 80%; */
+    background-color: rgba(255, 201, 92, 0.521);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-around;
 }
+
 
 /* Footer */
 footer {
@@ -117,5 +242,12 @@ footer {
     100% {
         scale: 1.5;
 
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .background-image {
+        background: url(./assets/background-mobile.png);
+        background-size: 100% ;
     }
 }
