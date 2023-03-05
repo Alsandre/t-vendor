@@ -8,10 +8,24 @@ const basketBtn = $(".basket-button");
 const backdrop = $("#backdrop");
 const basketClearBtn = $('#clear-basket');
 const basketCloseBtn = $('#close-basket');
-const searchBar = $('#search-bar');
+const tagSearchBar = $('#search-bar');
+const nameSearchBar = $('#search-by-name');
+const clearTagnameBtn = $('.clear-tagname');
 
+nameSearchBar.oninput = (e) => {
+  let menuArr = JSON.parse(localStorage.getItem('fresh-menu'));
+  let renderArr = menuArr.filter(element => element.productName.toLowerCase().includes(e.target.value.toLowerCase()));
+  mainContentRender(renderArr);
+}
 
-searchBar.oninput = (e) => searchForTagHandler(e, uniqueTagNames, tagListRender);
+clearTagnameBtn.addEventListener('click', () => {
+  $('#selected-tagname').textContent = '';
+  toggleDisplay('.clear-tagname', 'inline-block');
+  let menuArr = JSON.parse(localStorage.getItem('fresh-menu'));
+  mainContentRender(menuArr);
+})
+
+tagSearchBar.oninput = (e) => searchForTagHandler(e, uniqueTagNames, tagListRender);
 
 basketCloseBtn.onclick = () => {
   toggleDisplay("#basket");

@@ -1,4 +1,4 @@
-import { amountDecreaseHandler, amountIncreaseHandler } from "./event-handlers.js";
+import { amountDecreaseHandler, amountIncreaseHandler, filteredRender } from "./event-handlers.js";
 import { ProductCard } from "./web-component.js";
 
 export function $(selector) {
@@ -110,8 +110,6 @@ export function mainContentRender (arr) {
       element.price
     );
     listContainer.appendChild(productCard);
-
-    
   });
 }
 
@@ -121,6 +119,10 @@ export function tagListRender (arr) {
     let menuItem = document.createElement('li');
     menuItem.textContent = element;
     menuItem.addEventListener('click', (e) => {
+      $('#selected-tagname').textContent = e.currentTarget.textContent;
+      let clearbtn = $('.clear-tagname');
+      let clearbtnmode = window.getComputedStyle(clearbtn);
+      clearbtnmode.display === 'none' ? toggleDisplay('.clear-tagname', 'inline-block') : ''
       filteredRender(e);
     });
     $('#side-menu').appendChild(menuItem);

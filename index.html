@@ -82,7 +82,16 @@
 
         <ul class="selection-menu" id="side-menu"></ul>
       </aside>
-      <ul class="main-content" id="menu"></ul>
+      <div class="main-content-wrapper" >
+        <div class="dashboard">
+          <label for="search-by-name">Search by name</label>
+          <input class="search-by-name" name="search-by-name" id="search-by-name" type="text">
+        </div>
+        <div class="main-content" >
+          <span class="tagname">Selected tagname:<span id="selected-tagname"></span><button class="clear-tagname">x</button></span>
+          <ul id="menu"></ul>
+        </div>
+      </div>
     </main>
 
     <footer id="footer">rights and staff</footer>
