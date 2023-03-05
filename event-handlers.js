@@ -1,4 +1,4 @@
-import { toggleDisplay } from "./utility.js";
+import { toggleDisplay, $, basketRender, mainContentRender } from "./utility.js";
 
 export function addToBasketHandler (id) {
     const amountField = $('#amount-field');
@@ -8,17 +8,18 @@ export function addToBasketHandler (id) {
     setTimeout(() => {
         basket.style.animationName = '';
     }, 100);
+    basketRender(id);
 }
 
 export function localStorageUpdateHandler (id) {
     let newBasket;
     let currentBasket = JSON.parse(localStorage.getItem('order-amount'));
-    let currentPlant = JSON.parse(localStorage.getItem('fresh-menu')).find(el => `add_${el.id}` === id);
+    let currentPlant = JSON.parse(localStorage.getItem('fresh-menu')).find(el => `add-${el.id}` === id);
     if(currentBasket && currentBasket.length>0){
-        let isPlantInCurrentBasket = currentBasket.find(el => `add_${el.id}` === id);
+        let isPlantInCurrentBasket = currentBasket.find(el => `add-${el.id}` === id);
         if(isPlantInCurrentBasket){
             newBasket =  currentBasket.map(el => {
-                if(`add_${el.id}` === id){
+                if(`add-${el.id}` === id){
                     return {...el, amount: el.amount+1}
                 }else return el;
             })
@@ -29,7 +30,6 @@ export function localStorageUpdateHandler (id) {
         newBasket = [{...currentPlant, amount: 1}]
     }
     localStorage.setItem('order-amount', JSON.stringify(newBasket))
-    console.log(JSON.parse(localStorage.getItem('order-amount')))
 };
 
 export function basketClickHandler () {
@@ -37,3 +37,16 @@ export function basketClickHandler () {
     toggleDisplay('#backdrop');
 }
 
+export function amountIncreaseHandler () {
+    console.log('increase')
+}
+
+export function amountDecreaseHandler () {
+
+}
+
+export function filteredRender (event) {
+    let selectedTag = event.currentTarget.textContent;
+    let renderList = JSON.parse(localStorage.getItem('fresh-menu')).filter(element => element.categoryTag.includes(selectedTag));
+    mainContentRender(renderList)
+}

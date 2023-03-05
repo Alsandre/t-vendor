@@ -48,17 +48,14 @@
       </button>
 
       <div class="basket" id="basket">
-        <ul class="basket-list">
-          <li class="basket-item">
-            <span class="border basket-product-name">Name</span>
-            <span class="border basket-product-price">Price</span>
-            <span>x</span>
-            <span class="border basket-product-amount">Amount</span>
-            <span>=</span>
-            <span class="border basket-product-sum">Sum</span>
-            <span class="remove-button-space"></span>
-          </li>
-        </ul>
+        <div class="basket-item">
+          <span class="basket-header basket-product-name">Name</span>
+          <span class="basket-header basket-product-price">Price</span>
+          <span class="basket-header basket-product-amount">Amount</span>
+          <span class="basket-header basket-product-sum">Sum</span>
+          <span class="basket-header button-space"></span>
+        </div>
+        <ul class="basket-list"></ul>
         <div class="basket-total">
           <span>total:</span><span id="basket-total"></span>
         </div>
@@ -67,7 +64,6 @@
           <button id="place-order">place order</button>
         </div>
       </div>
-
     </header>
 
     <main>
@@ -75,14 +71,15 @@
       <aside>
         <div class="search-field">
           <label for="search-bar">Search by tag</label>
-          <input type="text" name="search-bar" id="search-bar" class="search-bar" />
+          <input
+            type="text"
+            name="search-bar"
+            id="search-bar"
+            class="search-bar"
+          />
         </div>
 
-        <ul class="selection-menu">
-          <li>decorative</li>
-          <li>fruit</li>
-          <li>vegetable</li>
-        </ul>
+        <ul class="selection-menu" id="side-menu"></ul>
       </aside>
       <ul class="main-content" id="menu"></ul>
     </main>

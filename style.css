@@ -86,26 +86,43 @@ h2 {
     list-style: none;
 }
 .basket-item {
-    background-color: #ccc;
     display: flex;
     justify-content: space-between;
     text-align: center;
 }
-.remove-button-space {
+.basket-header {
+    padding: 0.5rem;
+    color: #555;
+    font-weight: bold;
+    font-style: italic;
+    /* border: 1px solid green; */
+}
+.button-space {
     width: 50px;
-    
+}
+.remove-button {
+    color: red;
+    width: 25px;
+}
+.add-button {
+    color: green;
+    width: 25px;
 }
 .basket-product-name{
     flex: 1 0 100px;
-    border-right: 1px solid #333;
+    /* border: 1px solid green; */
+    /* border-right: 1px solid #333; */
 }
 .basket-product-price {
+    /* border: 1px solid green; */
     flex-basis: 60px;
 }
 .basket-product-amount {
+    /* border: 1px solid green; */
     flex-basis: 80px;
 }
 .basket-product-sum {
+    /* border: 1px solid green; */
     flex-basis: 60px;
 }
 .basket-total {
@@ -192,6 +209,7 @@ aside {
 }
 .selection-menu {
     list-style: none;
+    min-height: 100vh;
 }
 .selection-menu li {
     line-height: 1.5em;

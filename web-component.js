@@ -40,7 +40,7 @@ export class ProductCard extends HTMLElement {
 
     this.addToBasket = document.createElement('span');
     this.addToBasket.setAttribute('class', 'add-icon');
-    this.addToBasket.setAttribute('id', `add_${this.id}`);
+    this.addToBasket.setAttribute('id', `add-${this.id}`);
     this.addToBasket.innerHTML = '<span class="plus-sign">+</span><br><span class="add-badge">ADD</span>';
 
 
@@ -75,8 +75,7 @@ export class ProductCard extends HTMLElement {
       setTimeout(() => {
         this.shadow.querySelector('.add-icon').style.scale = '1';
       }, 100);
-      addToBasketHandler();
-      console.log(event.currentTarget.id)
+      addToBasketHandler(event.currentTarget.id);
       localStorageUpdateHandler(event.currentTarget.id)
 
     })
@@ -106,7 +105,6 @@ basketTemplate.innerHTML = `
   <button id="place-order">place order</button>
 </div>
 </div>`
-console.log(basketTemplate.cloneNode({deep: true}))
 
 class Basket extends HTMLElement {
   constructor() {
