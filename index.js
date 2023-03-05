@@ -1,9 +1,27 @@
 import { ProductCard } from "./web-component.js";
-import { $, mainContentRender, toggleDisplay } from "./utility.js";
-import { basketClickHandler, filteredRender } from "./event-handlers.js";
+import { $, calculateTotal, mainContentRender, tagListRender, toggleDisplay } from "./utility.js";
+import { basketClickHandler, filteredRender, searchForTagHandler } from "./event-handlers.js";
+
+export let uniqueTagNames = [];
 
 const basketBtn = $(".basket-button");
 const backdrop = $("#backdrop");
+const basketClearBtn = $('#clear-basket');
+const basketCloseBtn = $('#close-basket');
+const searchBar = $('#search-bar');
+
+
+searchBar.oninput = (e) => searchForTagHandler(e, uniqueTagNames, tagListRender);
+
+basketCloseBtn.onclick = () => {
+  toggleDisplay("#basket");
+  toggleDisplay("#backdrop");
+};
+
+basketClearBtn.onclick = () => {
+  $('.basket-list').textContent = '';
+  calculateTotal()
+}
 
 backdrop.addEventListener("click", () => {
   toggleDisplay("#basket");
@@ -17,7 +35,6 @@ const request = async () => {
     "https://tvendor-4db67-default-rtdb.europe-west1.firebasedatabase.app/productList.json"
   );
   const data = await res.json();
-  let uniqueTagNames = [];
   data.forEach((element) => {
     // let listContainer = $("#menu");
     // let productCard = new ProductCard(
@@ -37,14 +54,7 @@ const request = async () => {
     
   });
   mainContentRender(data);
-  uniqueTagNames.forEach(element => {
-    let menuItem = document.createElement('li');
-    menuItem.textContent = element;
-    menuItem.addEventListener('click', (e) => {
-      filteredRender(e);
-    });
-    $('#side-menu').appendChild(menuItem)
-  })
+  tagListRender(uniqueTagNames)
   localStorage.setItem("fresh-menu", JSON.stringify(data));
 };
 

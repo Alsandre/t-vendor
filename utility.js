@@ -95,7 +95,7 @@ function updateBasketEntry(id, operation = 'ADDITION') {
             amountField.textContent = --currentAmount;
             sumField.textContent = (+sumField.textContent-(+priceField.textContent)).toFixed(2);
     }
-    // console.log(typeof +sumField.textContent, +sumField.textContent)
+    calculateTotal();    
 }
 
 export function mainContentRender (arr) {
@@ -113,4 +113,29 @@ export function mainContentRender (arr) {
 
     
   });
+}
+
+export function tagListRender (arr) {
+  $('#side-menu').innerHTML = '';
+  arr.forEach(element => {
+    let menuItem = document.createElement('li');
+    menuItem.textContent = element;
+    menuItem.addEventListener('click', (e) => {
+      filteredRender(e);
+    });
+    $('#side-menu').appendChild(menuItem);
+  });
+}
+
+export function calculateTotal () {
+  let total = 0;
+  let list = document.querySelectorAll('.basket-list .basket-product-sum');
+  console.log(list)
+  list.forEach(element => {
+    let elementValue = +element.textContent;
+    total += elementValue;    
+  })
+
+  $('#basket-total').textContent = total.toFixed(2);
+
 }
