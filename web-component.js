@@ -1,9 +1,12 @@
-import { addToBasketHandler, localStorageUpdateHandler } from "./event-handlers.js";
-import { basketStyles, productCardStyles } from "./web-component-styles.js";
+import {
+  addToBasketHandler,
+  localStorageUpdateHandler,
+} from "./event-handlers.js";
+import { productCardStyles } from "./web-component-styles.js";
 
 export class ProductCard extends HTMLElement {
-  static get observedAttributes () {
-    return ['product-name', 'image-url', 'description']
+  static get observedAttributes() {
+    return ["product-name", "image-url", "description"];
   }
   constructor(title, description, id, imageUrl, price) {
     super();
@@ -34,15 +37,19 @@ export class ProductCard extends HTMLElement {
     descriptionTag.textContent = this.description;
     descriptionTag.setAttribute("class", "description");
 
-    const priceBadge = document.createElement('span');
-    priceBadge.innerHTML = `<span class="price-badge"><span class="price-whole">${Math.floor(this.price)}</span><span class="price-change">${((this.price-Math.floor(this.price))*100).toFixed(0)}</span></span>`
-    // priceBadge.textContent = this.price;
+    const priceBadge = document.createElement("span");
+    priceBadge.innerHTML = `<span class="price-badge"><span class="price-whole">${Math.floor(
+      this.price
+    )}</span><span class="price-change">${(
+      (this.price - Math.floor(this.price)) *
+      100
+    ).toFixed(0)}</span></span>`;
 
-    this.addToBasket = document.createElement('span');
-    this.addToBasket.setAttribute('class', 'add-icon');
-    this.addToBasket.setAttribute('id', `add-${this.id}`);
-    this.addToBasket.innerHTML = '<span class="plus-sign">+</span><br><span class="add-badge">ADD</span>';
-
+    this.addToBasket = document.createElement("span");
+    this.addToBasket.setAttribute("class", "add-icon");
+    this.addToBasket.setAttribute("id", `add-${this.id}`);
+    this.addToBasket.innerHTML =
+      '<span class="plus-sign">+</span><br><span class="add-badge">ADD</span>';
 
     let style = document.createElement("style");
 
@@ -55,67 +62,29 @@ export class ProductCard extends HTMLElement {
     this.containerTag.appendChild(this.addToBasket);
     this.shadow.appendChild(style);
     this.shadow.appendChild(this.containerTag);
-
   }
   connectedCallback() {
-    this.containerTag.addEventListener('mouseover', (event) => {
+    this.containerTag.addEventListener("mouseover", (event) => {
       event.stopImmediatePropagation();
-      event.currentTarget.style.scale = '1.05';
-      this.shadow.querySelector('.price-badge').style.display = 'block';
-      this.shadow.querySelector('.add-icon').style.display = 'block';
+      event.currentTarget.style.scale = "1.05";
+      this.shadow.querySelector(".price-badge").style.display = "block";
+      this.shadow.querySelector(".add-icon").style.display = "block";
     });
-    this.containerTag.addEventListener('mouseleave', (event) => {
+    this.containerTag.addEventListener("mouseleave", (event) => {
       event.stopImmediatePropagation();
-      event.currentTarget.style.scale = '1';
-      this.shadow.querySelector('.price-badge').style.display = 'none';
-      this.shadow.querySelector('.add-icon').style.display = 'none';
-    })
-    this.addToBasket.addEventListener('click', (event) => {
-      event.currentTarget.style.scale = '0.9';
+      event.currentTarget.style.scale = "1";
+      this.shadow.querySelector(".price-badge").style.display = "none";
+      this.shadow.querySelector(".add-icon").style.display = "none";
+    });
+    this.addToBasket.addEventListener("click", (event) => {
+      event.currentTarget.style.scale = "0.9";
       setTimeout(() => {
-        this.shadow.querySelector('.add-icon').style.scale = '1';
+        this.shadow.querySelector(".add-icon").style.scale = "1";
       }, 100);
       addToBasketHandler(event.currentTarget.id);
-      localStorageUpdateHandler(event.currentTarget.id)
-
-    })
+      localStorageUpdateHandler(event.currentTarget.id);
+    });
   }
 }
 
-let basketTemplate = document.createElement('template');
-basketTemplate.innerHTML = `
-<style>${basketStyles}</style>
-<div class="basket" id="basket">
-<ul class="basket-list">
-  <li class="basket-item">
-    <span class="border basket-product-name">Name</span>
-    <span class="border basket-product-price">Price</span>
-    <span>x</span>
-    <span class="border basket-product-amount">Amount</span>
-    <span>=</span>
-    <span class="border basket-product-sum">Sum</span>
-    <span class="remove-button-space"></span>
-  </li>
-</ul>
-<div class="basket-total">
-  <span>total:</span><span id="basket-total"></span>
-</div>
-<div class="basket-actions">
-  <button id="close-basket">close basket</button>
-  <button id="place-order">place order</button>
-</div>
-</div>`
-
-class Basket extends HTMLElement {
-  constructor() {
-    super();
-    this.shadow = this.attachShadow({mode: 'open'});
-    this.template = document.createElement('div');
-    // this.shadow.appendChild = basketTemplate.cloneNode({deep: true});
-    this.shadow.appendChild = template;
-  }
-
-};
-
-customElements.define("green-basket", Basket);
 customElements.define("product-card", ProductCard);

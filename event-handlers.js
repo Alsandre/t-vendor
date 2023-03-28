@@ -62,9 +62,35 @@ export function filteredRender(event) {
   );
   mainContentRender(renderList);
 }
+export function searchForNameHandler(event) {
+  let menuArr = JSON.parse(localStorage.getItem("fresh-menu"));
+  let renderArr = menuArr.filter((element) =>
+    element.productName.toLowerCase().includes(event.target.value.toLowerCase())
+  );
+  mainContentRender(renderArr);
+}
 
-export function searchForTagHandler (event, searchIn, updateCallback) {
-  console.log(event.target.value)
-  let newTagList = searchIn.filter(element => element.includes(event.target.value));
+export function searchForTagHandler(event, searchIn, updateCallback) {
+  console.log(event.target.value);
+  let newTagList = searchIn.filter((element) =>
+    element.includes(event.target.value)
+  );
   updateCallback(newTagList);
+}
+
+export function clearTagHandler() {
+  $("#selected-tagname").textContent = "";
+  toggleDisplay(".clear-tagname", "inline-block");
+  let menuArr = JSON.parse(localStorage.getItem("fresh-menu"));
+  mainContentRender(menuArr);
+}
+
+export function onBasketClose() {
+  toggleDisplay("#basket");
+  toggleDisplay("#backdrop");
+}
+
+export function clearBasketHandler() {
+  $(".basket-list").textContent = "";
+  calculateTotal();
 }

@@ -16,6 +16,7 @@
     <script defer src="index.js" type="module"></script>
     <script src="web-component.js" type="module"></script>
     <script src="utility.js" type="module"></script>
+    <!-- <script src="./dist/bundle.js"></script> -->
   </head>
   <body>
     <div class="backdrop" id="backdrop"></div>
@@ -68,7 +69,6 @@
     </header>
 
     <main>
-      <!-- <green-basket></green-basket> -->
       <aside>
         <div class="search-field">
           <label for="search-bar">Search by tag</label>
@@ -82,13 +82,21 @@
 
         <ul class="selection-menu" id="side-menu"></ul>
       </aside>
-      <div class="main-content-wrapper" >
+      <div class="main-content-wrapper">
         <div class="dashboard">
           <label for="search-by-name">Search by name</label>
-          <input class="search-by-name" name="search-by-name" id="search-by-name" type="text">
+          <input
+            class="search-by-name"
+            name="search-by-name"
+            id="search-by-name"
+            type="text"
+          />
         </div>
-        <div class="main-content" >
-          <span class="tagname">Selected tagname:<span id="selected-tagname"></span><button class="clear-tagname">x</button></span>
+        <div class="main-content">
+          <span class="tagname"
+            >Selected tagname:<span id="selected-tagname"></span
+            ><button class="clear-tagname">x</button></span
+          >
           <ul id="menu"></ul>
         </div>
       </div>
