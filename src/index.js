@@ -34,5 +34,5 @@ backdrop.onclick = onBasketClose;
 
 basketBtn.onclick = basketClickHandler;
 
-requestData(uniqueTagNames);
+// requestData(uniqueTagNames);
 
